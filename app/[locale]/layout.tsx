@@ -1,5 +1,4 @@
 import { Metadata, ResolvingMetadata, Viewport } from "next";
-import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 
@@ -22,10 +21,7 @@ export async function generateMetadata(
   const path = getPathnameFromMetadataState(state);
   const pathWithoutLocale = path?.slice(3);
 
-  const headersList = await headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-  const baseUrl = `https://${host}`;
+  const baseUrl = "https://romanenkosergio.github.io/meta-project-test-work";
   return {
     metadataBase: new URL(baseUrl),
     title: t("home.title"),
@@ -51,6 +47,10 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false
 };
+
+export async function generateStaticParams() {
+  return [{ locale: "en" }];
+}
 
 const Layout = async ({ children, params }: ILayoutProps) => {
   const { locale } = await params;
