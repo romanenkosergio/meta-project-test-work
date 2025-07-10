@@ -10,7 +10,7 @@ export interface ILocaleParams {
 }
 
 export interface IMetaParams {
-  params: ILocaleParams;
+  params: Promise<ILocaleParams>;
 }
 
 export interface ILayoutProps extends PropsWithChildren<IMetaParams> {}
